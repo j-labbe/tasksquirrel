@@ -1,36 +1,46 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
-
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+const VSCodeTasksDataProvider = require("./VSCodeTasksDataProvider");
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+	const vsCodeTasksProvider = new VSCodeTasksDataProvider(context);
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "tasksquirrel" is now active!');
+	// Register view provider & setup commands
+	vscode.window.registerTreeDataProvider("tasksquirrel", vsCodeTasksProvider);
+	vscode.commands.registerCommand("tasksquirrel.refresh", () => {
+		console.log("🐿️ Task Squirrel: Refreshing list...");
+		vsCodeTasksProvider.refresh();
+	});
+	vscode.commands.registerCommand("tasksquirrel.executeTask", (task) => {
+		console.log(task);
+		vscode.tasks.executeTask(task).then(value => value, () => console.log(`Error running ${task.name}`));
+	})
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('tasksquirrel.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
+	// Create watch for tasks.json
+	const tasksJsonWatcher = vscode.workspace.createFileSystemWatcher("**/.vscode/tasks.json");
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from TaskSquirrel!');
+	// Refresh the task list whenever the tasks.json file is changed
+	tasksJsonWatcher.onDidChange(() => vsCodeTasksProvider.refresh());
+	tasksJsonWatcher.onDidCreate(() => vsCodeTasksProvider.refresh());
+	tasksJsonWatcher.onDidDelete(() => vsCodeTasksProvider.refresh());
+
+	// Register FileSystemWatcher so it will be disposed when the extension is deactivated
+	context.subscriptions.push(tasksJsonWatcher);
+
+	// Load emojis on startup
+	vsCodeTasksProvider.loadEmojiOnConfigChange();
+
+	// Listen for changes in configuration
+	vscode.workspace.onDidChangeConfiguration((event) => {
+		if (event.affectsConfiguration("TaskSquirrel")) {
+			vsCodeTasksProvider.loadEmojiOnConfigChange();
+			vsCodeTasksProvider.refresh();
+		}
 	});
 
-	context.subscriptions.push(disposable);
+	console.log("🐿️ TaskSquirrel is ready to go!");
 }
 
-// This method is called when your extension is deactivated
-function deactivate() {}
-
-module.exports = {
-	activate,
-	deactivate
-}
+module.exports = { activate };

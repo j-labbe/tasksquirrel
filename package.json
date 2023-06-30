@@ -3,19 +3,118 @@
   "displayName": "TaskSquirrel",
   "description": "Run your VSCode tasks with ease.",
   "version": "0.0.1",
+  "icon": "icon.png",
+  "publisher": "j-lab1234",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/j-labbe/tasksquirrel.git"
+  },
   "engines": {
     "vscode": "^1.79.0"
   },
   "categories": [
     "Other"
   ],
+  "keywords": [
+    "task",
+    "tasks",
+    "packages",
+    "execute",
+    "run"
+  ],
   "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
-      "command": "tasksquirrel.helloWorld",
-      "title": "Hello World"
-    }]
+    "commands": [
+      {
+        "command": "tasksquirrel.refresh",
+        "title": "Refresh",
+        "icon": "refresh.svg"
+      },
+      {
+        "command": "tasksquirrel.executeTask",
+        "title": "Run Task"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "tasksquirrel.refresh",
+          "group": "navigation"
+        }
+      ]
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "tasksquirrel",
+          "name": "TaskSquirrel",
+          "type": "tree",
+          "treeDataProvider": "vscodeTasksDataProvider"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "TaskSquirrel",
+      "properties": {
+        "tasksquirrel.enableEmojis": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable emojis in task tree items."
+        },
+        "tasksquirrel.shellEmoji": {
+          "type": "string",
+          "default": "👾",
+          "description": "Emoji for shell tasks."
+        },
+        "tasksquirrel.processEmoji": {
+          "type": "string",
+          "default": "🚀",
+          "description": "Emoji for process tasks."
+        },
+        "tasksquirrel.npmEmoji": {
+          "type": "string",
+          "default": "💻",
+          "description": "Emoji for npm tasks."
+        },
+        "tasksquirrel.gulpEmoji": {
+          "type": "string",
+          "default": "🥤",
+          "description": "Emoji for gulp tasks."
+        },
+        "tasksquirrel.gruntEmoji": {
+          "type": "string",
+          "default": "🦁",
+          "description": "Emoji for grunt tasks."
+        },
+        "tasksquirrel.jakeEmoji": {
+          "type": "string",
+          "default": "🤠",
+          "description": "Emoji for jake tasks."
+        },
+        "tasksquirrel.tscEmoji": {
+          "type": "string",
+          "default": "ʦ",
+          "description": "Emoji for tsc tasks."
+        },
+        "tasksquirrel.dotnetEmoji": {
+          "type": "string",
+          "default": "🌐",
+          "description": "Emoji for dotnet tasks."
+        },
+        "tasksquirrel.goEmoji": {
+          "type": "string",
+          "default": "💨",
+          "description": "Emoji for go tasks."
+        },
+        "tasksquirrel.cmakeEmoji": {
+          "type": "string",
+          "default": "🎂",
+          "description": "Emoji for cmake tasks."
+        }
+      }
+    }
   },
   "scripts": {
     "lint": "eslint .",

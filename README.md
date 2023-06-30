@@ -1,65 +1,59 @@
 # tasksquirrel README
 
-This is the README for your extension "tasksquirrel". After writing up a brief description, we recommend including the following sections.
+Run your VSCode tasks with ease.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+TaskSquirrel provides an easy way to run your defined tasks from the VSCode explorer pane. 
+With optional, user-definable, emojis available, you can make it easy to identify task types
+from a large list of tasks.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+### Adding Tasks
 
-For example:
+Editing `.vscode/tasks.json` allows you, and VSCode, to define commands, processes, and workflows that are run often.
+You can read more about [VSCode Tasks Here](https://code.visualstudio.com/Docs/editor/tasks).
 
-This extension contributes the following settings:
+Any tasks you add to the `tasks.json` file will automatically display in the TaskSquirrel pane.
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+### Configuration
+
+This extension has the following settings:
+
+* `tasksquirrel.enableEmoji`: Enable/disable emojis.
+* `tasksquirrel.shellEmoji`: Change the default shell emoji.
+* `tasksquirrel.processEmoji`: Change the default process emoji.
+* `tasksquirrel.npmEmoji`: Change the default npm emoji.
+* `tasksquirrel.gulpEmoji`: Change the default gulp emoji.
+* `tasksquirrel.gruntEmoji`: Change the default grunt emoji.
+* `tasksquirrel.jakeEmoji`: Change the default jake emoji.
+* `tasksquirrel.tscEmoji`: Change the default tsc emoji.
+* `tasksquirrel.dotnetEmoji`: Change the default dotnet emoji.
+* `tasksquirrel.goEmoji`: Change the default go emoji.
+* `tasksquirrel.cmakeEmoji`: Change the default cmake emoji.
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+If you find an issue, please check the open [issues](https://github.com/j-labbe/tasksquirrel/issues) before submitting a new one.
 
 ## Release Notes
 
 Users appreciate release notes as you update your extension.
 
-### 1.0.0
+### 0.0.1
 
-Initial release of ...
+Initial release.
 
-### 1.0.1
+## Roadmap
 
-Fixed issue #.
+There are features I want to add in the future, such as:
 
-### 1.1.0
+- [X] Emoji
+- [ ] Task Templates - Easily create tasks from a button in TaskSquirrel
+... and more.
 
-Added features X, Y, and Z.
+If you have any suggestions, create an issue and I can decide if it's worth adding.
 
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+## Inspiration
+While searching for a solution to running tasks easily, I discovered [Task Runner](https://github.com/sana-ajani/taskrunner-code), which is very similar to this extension. I decided to create my own extension to learn about creating VSCode extensions, and to add more features I find useful.
